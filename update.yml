@@ -5,4 +5,4 @@
   tasks:
     - name: Update the software package dependecy.
       ansible.builtin.shell:
-        "apt update"
+        "date"
