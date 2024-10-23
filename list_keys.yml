@@ -9,6 +9,10 @@
       register: pub_files             # Register the result to use later
 
     - name: Format and display the numbered list
+      set_fact:
+        numbered_keys: "{{ numbered_keys | default([]) + ['%d. %s' % (item.0 + 1, item.1.path | basename)] }}"
+      with_indexed_items: "{{ pub_files.files }}"
+
+    - name: Display the clean numbered list of .pub files in a single message
       debug:
-        msg: "{{ '%d. %s' | format(loop.index, item.path | basename) }}"
-      loop: "{{ pub_files.files }}"
+        msg: "{{ numbered_keys | join('\n') }}"
