@@ -1,6 +1,7 @@
 - name: Manage SSH keys on remote servers
   hosts: all
   become: yes
+  tasks:
     - name: Remove the selected SSH key
       authorized_key:
         user: "{{ username }}"
