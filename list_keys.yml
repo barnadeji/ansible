@@ -9,6 +9,8 @@
       register: pub_files             # Register the result to use later
 
     - name: Display the clean list of .pub files
-      debug:
+      vars:
         msg: | 
-              "{{ pub_files.files | map(attribute='path') | map('basename') | join('\n') }}"
+              "{{ pub_files.files | map(attribute='path') | map('basename') }}"
+      debug:
+        msg: "{{ msg.join('\n') }}"
