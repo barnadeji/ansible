@@ -8,7 +8,14 @@
         recurse: yes                  # Set to yes if you want to search subdirectories
       register: pub_files             # Register the result to use later
 
-    - name: Display the names of the .pub files
+    - name: Set fact for a clean numbered list
+      set_fact:
+        numbered_keys: |
+          {%- for item in pub_files.files %}
+          {{ loop.index }}. {{ item.path | basename }}
+          {%- endfor %}
+
+    - name: Display the numbered list of .pub files
       debug:
-        msg: "{{ item.path | basename }}"
-      loop: "{{ pub_files.files }}"
+        msg: "{{ numbered_keys }}"
+      no_log: true  # Suppresses the output of unnecessary debug info
