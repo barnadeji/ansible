@@ -1,0 +1,13 @@
+- name: Create .pub files in a directory
+  hosts: localhost
+  become: false
+  vars:
+    project: "{{ project }}"
+    filename: "{{ filename }}"
+  tasks:
+  - name: Create local file with info
+    lineinfile:
+      path: "/home/{{ project }}/{{ filename }}.pub"
+      line:
+        "IP Address: {{ hostvars[item]['bar'].stdout }} - Installed: {{ hostvars[item]['path'].stat.exists }}"
+    with_items: "{{ query('inventory_hostnames', 'all') }}"
