@@ -15,4 +15,4 @@
 
     - name: Display the clean numbered list of .pub files
       debug:
-        msg: "{{ numbered_keys | join('\n') }}"
+        msg: "{{ numbered_keys | to_nice_yaml }}"
