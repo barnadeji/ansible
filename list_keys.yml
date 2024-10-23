@@ -3,7 +3,7 @@
   tasks:
     - name: Find all .pub files in the specified directory
       find:
-        paths: "/path/to/directory"   # Specify the directory to search in
+        paths: "/home"   # Specify the directory to search in
         patterns: "*.pub"             # Only look for .pub files
         recurse: yes                  # Set to yes if you want to search subdirectories
       register: pub_files             # Register the result to use later
