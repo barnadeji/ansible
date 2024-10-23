@@ -13,4 +13,4 @@
         msg: | 
               "{{ pub_files.files | map(attribute='path') | map('basename') }}"
       debug:
-        msg: "{{ msg.join('\n') }}"
+        msg: "{{ msg.split('\n') }}"
