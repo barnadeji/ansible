@@ -1,6 +1,5 @@
 - name: Create .pub files in a directory
   hosts: localhost
-  become: yes
   vars:
     project: "{{ project }}"
     filename: "{{ filename }}"
