@@ -1,10 +1,5 @@
----
-- name: Manage SSH keys on remote servers
-  hosts: all
-  become: yes
-  tasks:
-    - name: Add SSH key for a user (if not already present)
-      authorized_key:
-        user: "{{ username }}"
-        state: present
-        key: "{{ ssh_key }}"
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '/home/test.pub') }}"
