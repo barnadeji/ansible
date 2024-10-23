@@ -1,8 +1,0 @@
-- name: Install necessary softwares
-  hosts: all
-  strategy: free
-  become: true
-  tasks:
-    - name: Update the software package dependecy.
-      ansible.builtin.shell:
-        "date"
