@@ -8,14 +8,11 @@
         recurse: yes                  # Set to yes if you want to search subdirectories
       register: pub_files             # Register the result to use later
 
-    - name: Set fact for a clean numbered list
+    - name: Format the list as numbered output
       set_fact:
-        numbered_keys: |
-          {%- for item in pub_files.files %}
-          {{ loop.index }}. {{ item.path | basename }}
-          {%- endfor %}
+        numbered_keys: "{{ numbered_keys|default([]) + ['%d. %s' % (item|int + 1, pub_files.files[item].path | basename)] }}"
+      loop: "{{ range(0, pub_files.files|length) }}"
 
-    - name: Display the numbered list of .pub files
+    - name: Display the clean numbered list of .pub files
       debug:
-        msg: "{{ numbered_keys }}"
-      no_log: true  # Suppresses the output of unnecessary debug info
+        msg: "{{ numbered_keys | join('\n') }}"
