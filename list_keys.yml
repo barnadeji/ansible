@@ -10,5 +10,5 @@
 
     - name: Display the names of the .pub files
       debug:
-        msg: "{{ item.path }}"
+        msg: "{{ item.path | basename }}"
       loop: "{{ pub_files.files }}"
