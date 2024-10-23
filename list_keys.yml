@@ -8,15 +8,6 @@
         recurse: yes                  # Set to yes if you want to search subdirectories
       register: pub_files             # Register the result to use later
 
-    - name: Create a file with the clean list of .pub files
-      copy:
-        content: "{{ pub_files.files | map(attribute='path') | map('basename') | join('\n') }}"
-        dest: "/tmp/pub_files_list.txt"
-
-    - name: Display the content of the file
-      command: cat /tmp/pub_files_list.txt
-      register: pub_files_content
-
-    - name: Show the clean list of .pub files
+    - name: Display the clean list of .pub files
       debug:
-        msg: "{{ pub_files_content.stdout }}"
+        msg: | "{{ pub_files.files | map(attribute='path') | map('basename') | join('\n') }}"
