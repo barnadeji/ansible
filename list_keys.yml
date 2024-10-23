@@ -10,4 +10,5 @@
 
     - name: Display the clean list of .pub files
       debug:
-        msg: | "{{ pub_files.files | map(attribute='path') | map('basename') | join('\n') }}"
+        msg: | 
+              "{{ pub_files.files | map(attribute='path') | map('basename') | join('\n') }}"
