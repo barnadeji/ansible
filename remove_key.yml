@@ -1,0 +1,8 @@
+- name: Manage SSH keys on remote servers
+  hosts: all
+  become: yes
+    - name: Remove the selected SSH key
+      authorized_key:
+        user: "{{ username }}"
+        state: absent
+        key: "{{ lookup('file', '/home/{{ key }}.pub') }}"
