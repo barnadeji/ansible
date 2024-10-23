@@ -4,9 +4,14 @@
     project: "{{ project }}"
     filename: "{{ filename }}"
   tasks:
-  - name: Create local file with info
+  - name: Check if the file exists
+    stat:
+      path: "/home/{{ project }}/{{ filename }}.pub"
+    register: file_check
+  - name: Create a local file with info
     lineinfile:
       path: "/home/{{ project }}/{{ filename }}.pub"
       line: "{{ key }}"
       state: present
       create: true
+    when: not file_check.stat.exists
