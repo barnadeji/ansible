@@ -13,4 +13,4 @@
         msg: | 
               {{ pub_files.files }}
       debug:
-        msg: "{{ msg.split('\n') }}"
+        msg: "{{ msg }}"
