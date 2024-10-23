@@ -10,8 +10,8 @@
 
     - name: Format the list as numbered output
       set_fact:
-        numbered_keys: "{{ numbered_keys|default([]) + ['%d. %s' % (loop.index, item.path | basename)] }}"
-      loop: "{{ pub_files.files }}"
+        numbered_keys: "{{ numbered_keys | default([]) + ['%d. %s' % (item.0 + 1, item.1.path | basename)] }}"
+      with_indexed_items: "{{ pub_files.files }}"
 
     - name: Display the clean numbered list of .pub files
       debug:
