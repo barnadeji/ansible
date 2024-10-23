@@ -6,4 +6,4 @@
       ansible.posix.authorized_key:
         user: root
         state: present
-        key: "{% for key in query('fileglob', '/home/pub_keys/*.pub') %}{{ lookup('file', key) ~ '\n'}}{% endfor %}"
+        key: "{% for key in query('fileglob', '/home/*.pub') %}{{ lookup('file', key) ~ '\n'}}{% endfor %}"
