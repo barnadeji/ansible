@@ -15,3 +15,7 @@
       state: present
       create: true
     when: not file_check.stat.exists
+  - name: Return a message if the file already exists
+    debug:
+      msg: "The file already exists and no content was written."
+    when: file_check.stat.exists
