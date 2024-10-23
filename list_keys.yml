@@ -2,17 +2,9 @@
 - name: Manage SSH keys on remote servers
   hosts: all
   become: yes
-  vars:
-    ssh_keys:
-      - name: "key1"
-        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1..."
-      - name: "key2"
-        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD2..."
-      - name: "key3"
-        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQEr..."
   tasks:
 
     - name: List available SSH keys
       debug:
-        msg: "{{ item.name }}"
-      loop: "{{ ssh_keys }}"
+        msg: "Key"
+      loop: "{% for key in query('fileglob', '/home/*.pub') %}{{ lookup('file', key) ~ '\n'}}{% endfor %}"
